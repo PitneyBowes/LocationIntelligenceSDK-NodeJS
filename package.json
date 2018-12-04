@@ -2,14 +2,14 @@
     "name": "pb-locateapi-client",
     "version": "6.0.0",
     "description": "NodeJS client for pb-locateapi-client",
-    "repository": "GIT_USER_ID/GIT_REPO_ID",
+    "repository": "PitneyBowes/LocationIntelligenceSDK-NodeJS",
     "main": "api.js",
     "scripts": {
         "clean": "rm -Rf node_modules/ typings/ *.js",
         "build": "tsc",
         "test": "npm run build && node client.js"
     },
-    "author": "Swagger Codegen Contributors",
+    "author": "amit.singh@pb.com",
     "license": "Apache-2.0",
     "dependencies": {
         "@types/node": "^10.12.10",
