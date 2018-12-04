@@ -57,7 +57,7 @@ The following platforms are supported by Location Intelligence SDKs:
 Location Intelligence NodeJS SDK facilitates you to build NodeJS applications using Location Intelligence APIs.
 ### Getting Started
 To get started with NodeJS SDK, you must first register at [Location Intelligence API Home Page](http://developer.pitneybowes.com/en/location-intelligence.html) and obtain your API Key and Secret to get started with the NodeJS SDK and call Location Intelligence APIs.
-For more information refer to [‘Getting Started with NodeJS SDK’](https://locate.pitneybowes.com/docs/location-intelligence/v1/en/index.html#NodeJS%20SDK/NodeJS_intro.html) section in documentation.
+For more information refer to [‘Getting Started with NodeJS SDK’](https://locate.pitneybowes.com/docs/location-intelligence/v1/en/index.html#NodeJS/node.js_sdk.html) section in documentation.
 
 
 # LocationIntelligenceNodeJSSDK
