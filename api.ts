@@ -125,13 +125,6 @@ export class Address {
     'unitValue': string;
 }
 
-export class AddressBylocation {
-    'match': Match;
-    'address': MatchedAddress;
-    'distance': Distance;
-    'geometry': Geometry;
-}
-
 export class Age {
     'birthday': Birthday;
     'range': string;
@@ -391,14 +384,6 @@ export class ConfiguredDictionaryResponse {
     'dictionaries': Array<Dictionary>;
 }
 
-export class ContactDetails {
-    'address': MatchedAddress;
-    'phone': string;
-    'fax': string;
-    'email': string;
-    'url': string;
-}
-
 export class ContactPerson {
     'title': string;
     'prefix': string;
@@ -513,11 +498,6 @@ export class CustomPreferences {
 export class DateTimeEarthQuake {
     'date': string;
     'time': string;
-}
-
-export class Demographics {
-    'boundaries': Boundaries;
-    'themes': DemographicsThemes;
 }
 
 export class DemographicsThemes {
@@ -958,6 +938,16 @@ export class GenderTheme {
     'rangeVariable': Array<RangeVariable>;
 }
 
+export class GeoEnrichMetadataResponse {
+    'sic': Array<SicMetadata>;
+    'category': Array<CategoryMetadata>;
+}
+
+export class GeoEnrichResponse {
+    'poi': Array<POIPlaces>;
+    'matchedAddress': MatchedAddress;
+}
+
 export class GeoIdentityName {
     'given': string;
     'family': string;
@@ -1023,11 +1013,6 @@ export class GeoLocationPlace {
 export class GeoLocationState {
     'confidence': string;
     'value': string;
-}
-
-export class GeoPlaceMetadataResponse {
-    'sic': Array<SicMetadata>;
-    'category': Array<CategoryMetadata>;
 }
 
 export class GeoPos {
@@ -1203,11 +1188,6 @@ export class GeocodeServiceResponseList {
 export class Geometry {
     'type': string;
     'coordinates': Array<number>;
-}
-
-export class GeoplacesResponse {
-    'poi': Array<POIPlaces>;
-    'matchedAddress': MatchedAddress;
 }
 
 export class GeosearchLocation {
@@ -1407,10 +1387,6 @@ export class Location {
     'formatted': string;
 }
 
-export class Locations {
-    'location': Array<AddressBylocation>;
-}
-
 export class Magnitude {
     'value': number;
     'scale': string;
@@ -1462,12 +1438,6 @@ export class Matrix {
 export class Mcd {
     'name': string;
     'code': string;
-}
-
-export class Name {
-    'langType': string;
-    'langISOCode': string;
-    'value': string;
 }
 
 export class Neighborhood {
@@ -1581,12 +1551,6 @@ export class Photo {
     'value': string;
 }
 
-export class Place {
-    'level': string;
-    'levelName': string;
-    'name': Array<Name>;
-}
-
 export class PlaceByLocations {
     'location': Array<PlaceByLocationsLocation>;
 }
@@ -1607,35 +1571,6 @@ export class PlaceLocationName {
     'value': string;
 }
 
-export class Poi {
-    'langISOCode': string;
-    'langType': string;
-    'displayName': string;
-    'name': string;
-    'alias': string;
-    'brandName': string;
-    'categoryCode': number;
-    'open24Hours': string;
-    'contactDetails': ContactDetails;
-    'distance': Distance;
-    'latitude': string;
-    'longitude': string;
-    'customValue1': string;
-    'customValue2': string;
-    'customValue3': string;
-    'customValue4': string;
-    'customValue5': string;
-    'customValue6': string;
-    'customValue7': string;
-    'customValue8': string;
-    'customValue9': string;
-    'customValue10': string;
-}
-
-export class PoiByLocation {
-    'location': Array<PoiLocation>;
-}
-
 export class PoiClassification {
     'sic': Sic;
     'category': Category;
@@ -1649,13 +1584,6 @@ export class PoiContactDetails {
     'countryAccessCode': string;
     'email': string;
     'url': string;
-}
-
-export class PoiLocation {
-    'dataset': string;
-    'poi': Poi;
-    'distance': Distance;
-    'geometry': Geometry;
 }
 
 export class Points {
@@ -1868,6 +1796,7 @@ export class SalesTax {
     'totalTaxAmount': number;
     'stateTax': number;
     'stateTaxRate': number;
+    'stateTaxAmount': number;
     'countyTax': number;
     'countyTaxRate': number;
     'countyTaxAmount': number;
@@ -2962,44 +2891,19 @@ export class LIAPIGeoEnrichServiceApi {
     }
     
     /**
-     * Address By Location.
-     * This service accepts longitude and latitude as input and returns an address for that location.
-     * @param latitude Latitude of the location.
-     * @param longitude Longitude of the location.
-     * @param searchRadius Radius range within which search is performed.
-     * @param searchRadiusUnit Radius unit such as feet, kilometers, miles or meters.
+     * Returns Category Codes with their sub-categories (if exist), descriptions and SIC Codes mapping
+     * Accepts first partial digits or full category codes to filter the response
+     * @param categoryCode Specify starting digits or full category code to filter the response
      */
-    public getAddress (latitude: string, longitude: string, searchRadius?: string, searchRadiusUnit?: string) : Promise<{ response: http.IncomingMessage; body: Locations;  }> {
-        const localVarPath = this.basePath + '/geoenrich/v1/address/bylocation';
+    public getCategoryCodeMetadata (categoryCode?: string) : Promise<{ response: http.IncomingMessage; body: GeoEnrichMetadataResponse;  }> {
+        const localVarPath = this.basePath + '/geoenrich/v1/metadata/category';
         let queryParameters: any = {};
         let headerParams: any =  this.defaultHeaders;
         let formParams: any = {};
 
 
-        // verify required parameter 'latitude' is not null or undefined
-        if (latitude === null || latitude === undefined) {
-             return Promise.reject({ response: null, body: {errors:[{"errorCode":"Validation_Error",errorDescription:"Required parameter latitude was null or undefined when calling getAddress."}]}})
-        }
-
-        // verify required parameter 'longitude' is not null or undefined
-        if (longitude === null || longitude === undefined) {
-             return Promise.reject({ response: null, body: {errors:[{"errorCode":"Validation_Error",errorDescription:"Required parameter longitude was null or undefined when calling getAddress."}]}})
-        }
-
-        if (latitude !== undefined) {
-            queryParameters['latitude'] = latitude;
-        }
-
-        if (longitude !== undefined) {
-            queryParameters['longitude'] = longitude;
-        }
-
-        if (searchRadius !== undefined) {
-            queryParameters['searchRadius'] = searchRadius;
-        }
-
-        if (searchRadiusUnit !== undefined) {
-            queryParameters['searchRadiusUnit'] = searchRadiusUnit;
+        if (categoryCode !== undefined) {
+            queryParameters['categoryCode'] = categoryCode;
         }
 
         let useFormData = false;
@@ -3028,7 +2932,7 @@ export class LIAPIGeoEnrichServiceApi {
             }
         }
 
-        return new Promise<{ response: http.IncomingMessage; body: Locations;  }>((resolve, reject) => {
+        return new Promise<{ response: http.IncomingMessage; body: GeoEnrichMetadataResponse;  }>((resolve, reject) => {
             request(requestOptions, (error, response, body) => {
                 if (error) {
                     reject(error);
@@ -3049,54 +2953,58 @@ export class LIAPIGeoEnrichServiceApi {
     });*/
     }
     /**
-     * Points Of Interest By Location.
-     * Identifies and retrieves Points of Interest that exist around a specific location (ordered by distance from the location).
-     * @param longitude Longitude of the location.
-     * @param latitude Latitude of the location.
-     * @param brandName Specifies the name of the brand to be searched. Also performs search on partially specified brand names.
-     * @param category Specific Category/Categories for which the POI search is performed. (Categories 10020102,10020103 are for Chinese and Italian Restaurants .https://developer2.pitneybowes.com/docs/location-intelligence/v1/en/poicategory/EightDigitPOICategoryCodes.xlsx 
+     * Point of Interests By Address.
+     * Accepts address as an input to retrieve nearby point of interests.
+     * @param address Address
+     * @param country Country
+     * @param name Matched against Name, BrandName and Trade Name. Partial terms are also matched with fuzziness (max edit distance is 1)
+     * @param type Matched against the content which defines the type of the poi. 
+     * @param categoryCode Specific Category/Categories Codes for the desired POIs. Accepts a mix of 4 digit (Top Category), 6 digit (Second-Level Category) and 11 digit (Low-Level Category) Category Codes. https://developer2.pitneybowes.com/docs/location-intelligence/v1/en/poicategory/LiApiPOICategoryCodes.xlsx 
+     * @param sicCode Specific SIC Codes/Codes for the desired POIs. Accepts a mix of 4 digit (Top Category) and 8 digit (Low-Level Category) SIC Codes.
      * @param maxCandidates Maximum number of POIs that can be retrieved.
      * @param searchRadius Radius range within which search is performed.
      * @param searchRadiusUnit Radius unit such as Feet, Kilometers, Miles or Meters.
-     * @param searchDataset The datasets upon which the POI search can be performed.
-     * @param searchPriority Search order of POI datasets mentioned in searchDataset.
      * @param travelTime Specifies the travel time within which method searches for results (POIs which can be reached within travel time)the search boundary in terms of time mentioned in &#39;travelTimeUnit&#39;. The results are retrieved from the polygon formed based on the travel time specified. This means search can be done in the mentioned time results be from the mentioned time.
      * @param travelTimeUnit Specifies acceptable time units.Allowed values Minutes,Hours,Seconds and Milliseconds
      * @param travelDistance Specifies the search boundary in terms of distance mentioned in &#39;travelDistanceUnit&#39;. The results are retrieved from the polygon formed based on the travel distance specified.
      * @param travelDistanceUnit Specifies acceptable time units.Allowed values Feet,Kilometers,Miles and Meters
-     * @param mode Specifies the available mode of commute. This is required when u r trying to do search by travel distance or travel time.Allowed values driving and walking
+     * @param travelMode Specifies the available mode of commute. This is required when u r trying to do search by travel distance or travel time. Allowed values driving and walking
+     * @param sortBy Specifies the order in which POIs are retrieved.
      */
-    public getEntityByLocation (longitude: string, latitude: string, brandName?: string, category?: string, maxCandidates?: string, searchRadius?: string, searchRadiusUnit?: string, searchDataset?: string, searchPriority?: string, travelTime?: string, travelTimeUnit?: string, travelDistance?: string, travelDistanceUnit?: string, mode?: string) : Promise<{ response: http.IncomingMessage; body: PoiByLocation;  }> {
-        const localVarPath = this.basePath + '/geoenrich/v1/poi/bylocation';
+    public getPOIsByAddress (address: string, country?: string, name?: string, type?: string, categoryCode?: string, sicCode?: string, maxCandidates?: string, searchRadius?: string, searchRadiusUnit?: string, travelTime?: string, travelTimeUnit?: string, travelDistance?: string, travelDistanceUnit?: string, travelMode?: string, sortBy?: string) : Promise<{ response: http.IncomingMessage; body: GeoEnrichResponse;  }> {
+        const localVarPath = this.basePath + '/geoenrich/v1/poi/byaddress';
         let queryParameters: any = {};
         let headerParams: any =  this.defaultHeaders;
         let formParams: any = {};
 
 
-        // verify required parameter 'longitude' is not null or undefined
-        if (longitude === null || longitude === undefined) {
-             return Promise.reject({ response: null, body: {errors:[{"errorCode":"Validation_Error",errorDescription:"Required parameter longitude was null or undefined when calling getEntityByLocation."}]}})
+        // verify required parameter 'address' is not null or undefined
+        if (address === null || address === undefined) {
+             return Promise.reject({ response: null, body: {errors:[{"errorCode":"Validation_Error",errorDescription:"Required parameter address was null or undefined when calling getPOIsByAddress."}]}})
         }
 
-        // verify required parameter 'latitude' is not null or undefined
-        if (latitude === null || latitude === undefined) {
-             return Promise.reject({ response: null, body: {errors:[{"errorCode":"Validation_Error",errorDescription:"Required parameter latitude was null or undefined when calling getEntityByLocation."}]}})
+        if (address !== undefined) {
+            queryParameters['address'] = address;
         }
 
-        if (longitude !== undefined) {
-            queryParameters['longitude'] = longitude;
+        if (country !== undefined) {
+            queryParameters['country'] = country;
         }
 
-        if (latitude !== undefined) {
-            queryParameters['latitude'] = latitude;
+        if (name !== undefined) {
+            queryParameters['name'] = name;
         }
 
-        if (brandName !== undefined) {
-            queryParameters['brandName'] = brandName;
+        if (type !== undefined) {
+            queryParameters['type'] = type;
         }
 
-        if (category !== undefined) {
-            queryParameters['category'] = category;
+        if (categoryCode !== undefined) {
+            queryParameters['categoryCode'] = categoryCode;
+        }
+
+        if (sicCode !== undefined) {
+            queryParameters['sicCode'] = sicCode;
         }
 
         if (maxCandidates !== undefined) {
@@ -3109,14 +3017,6 @@ export class LIAPIGeoEnrichServiceApi {
 
         if (searchRadiusUnit !== undefined) {
             queryParameters['searchRadiusUnit'] = searchRadiusUnit;
-        }
-
-        if (searchDataset !== undefined) {
-            queryParameters['searchDataset'] = searchDataset;
-        }
-
-        if (searchPriority !== undefined) {
-            queryParameters['searchPriority'] = searchPriority;
         }
 
         if (travelTime !== undefined) {
@@ -3135,8 +3035,12 @@ export class LIAPIGeoEnrichServiceApi {
             queryParameters['travelDistanceUnit'] = travelDistanceUnit;
         }
 
-        if (mode !== undefined) {
-            queryParameters['mode'] = mode;
+        if (travelMode !== undefined) {
+            queryParameters['travelMode'] = travelMode;
+        }
+
+        if (sortBy !== undefined) {
+            queryParameters['sortBy'] = sortBy;
         }
 
         let useFormData = false;
@@ -3165,7 +3069,149 @@ export class LIAPIGeoEnrichServiceApi {
             }
         }
 
-        return new Promise<{ response: http.IncomingMessage; body: PoiByLocation;  }>((resolve, reject) => {
+        return new Promise<{ response: http.IncomingMessage; body: GeoEnrichResponse;  }>((resolve, reject) => {
+            request(requestOptions, (error, response, body) => {
+                if (error) {
+                    reject(error);
+                } else {
+                    if (response.statusCode >= 200 && response.statusCode <= 299) {
+                        resolve({ response: response, body: body });
+                    } else {
+                        reject(response);
+                    }
+                }
+            });
+        });
+
+
+   /* })
+    .catch((error) =>{
+    return Promise.reject(error);
+    });*/
+    }
+    /**
+     * Point of Interests By Location.
+     * Accepts longitude and latitude as an input to retrieve nearby point of interests.
+     * @param longitude Longitude of the location.
+     * @param latitude Latitude of the location.
+     * @param name Matched against Name, BrandName and Trade Name. Partial terms are also matched with fuzziness (max edit distance is 1)
+     * @param type Matched against the content which defines the type of the poi. 
+     * @param categoryCode Specific Category/Categories Codes for the desired POIs. Accepts a mix of 4 digit (Top Category), 6 digit (Second-Level Category) and 11 digit (Low-Level Category) Category Codes. https://locate.pitneybowes.com/docs/location-intelligence/v1/en/poicategory/LiApiPOICategoryCodes.xlsx 
+     * @param sicCode Specific SIC Codes/Codes for the desired POIs. Accepts a mix of 4 digit (Top Category) and 8 digit (Low-Level Category) SIC Codes.
+     * @param maxCandidates Maximum number of POIs that can be retrieved.
+     * @param searchRadius Radius range within which search is performed.
+     * @param searchRadiusUnit Radius unit such as Feet, Kilometers, Miles or Meters.
+     * @param travelTime Specifies the travel time within which method searches for results (POIs which can be reached within travel time)the search boundary in terms of time mentioned in &#39;travelTimeUnit&#39;. The results are retrieved from the polygon formed based on the travel time specified. This means search can be done in the mentioned time results be from the mentioned time.
+     * @param travelTimeUnit Specifies acceptable time units.Allowed values Minutes,Hours,Seconds and Milliseconds
+     * @param travelDistance Specifies the search boundary in terms of distance mentioned in &#39;travelDistanceUnit&#39;. The results are retrieved from the polygon formed based on the travel distance specified.
+     * @param travelDistanceUnit Specifies acceptable time units.Allowed values Feet,Kilometers,Miles and Meters
+     * @param travelMode Specifies the available mode of commute. This is required when u r trying to do search by travel distance or travel time. Allowed values driving and walking
+     * @param sortBy Specifies the order in which POIs are retrieved.
+     */
+    public getPOIsByLocation (longitude: string, latitude: string, name?: string, type?: string, categoryCode?: string, sicCode?: string, maxCandidates?: string, searchRadius?: string, searchRadiusUnit?: string, travelTime?: string, travelTimeUnit?: string, travelDistance?: string, travelDistanceUnit?: string, travelMode?: string, sortBy?: string) : Promise<{ response: http.IncomingMessage; body: GeoEnrichResponse;  }> {
+        const localVarPath = this.basePath + '/geoenrich/v1/poi/bylocation';
+        let queryParameters: any = {};
+        let headerParams: any =  this.defaultHeaders;
+        let formParams: any = {};
+
+
+        // verify required parameter 'longitude' is not null or undefined
+        if (longitude === null || longitude === undefined) {
+             return Promise.reject({ response: null, body: {errors:[{"errorCode":"Validation_Error",errorDescription:"Required parameter longitude was null or undefined when calling getPOIsByLocation."}]}})
+        }
+
+        // verify required parameter 'latitude' is not null or undefined
+        if (latitude === null || latitude === undefined) {
+             return Promise.reject({ response: null, body: {errors:[{"errorCode":"Validation_Error",errorDescription:"Required parameter latitude was null or undefined when calling getPOIsByLocation."}]}})
+        }
+
+        if (longitude !== undefined) {
+            queryParameters['longitude'] = longitude;
+        }
+
+        if (latitude !== undefined) {
+            queryParameters['latitude'] = latitude;
+        }
+
+        if (name !== undefined) {
+            queryParameters['name'] = name;
+        }
+
+        if (type !== undefined) {
+            queryParameters['type'] = type;
+        }
+
+        if (categoryCode !== undefined) {
+            queryParameters['categoryCode'] = categoryCode;
+        }
+
+        if (sicCode !== undefined) {
+            queryParameters['sicCode'] = sicCode;
+        }
+
+        if (maxCandidates !== undefined) {
+            queryParameters['maxCandidates'] = maxCandidates;
+        }
+
+        if (searchRadius !== undefined) {
+            queryParameters['searchRadius'] = searchRadius;
+        }
+
+        if (searchRadiusUnit !== undefined) {
+            queryParameters['searchRadiusUnit'] = searchRadiusUnit;
+        }
+
+        if (travelTime !== undefined) {
+            queryParameters['travelTime'] = travelTime;
+        }
+
+        if (travelTimeUnit !== undefined) {
+            queryParameters['travelTimeUnit'] = travelTimeUnit;
+        }
+
+        if (travelDistance !== undefined) {
+            queryParameters['travelDistance'] = travelDistance;
+        }
+
+        if (travelDistanceUnit !== undefined) {
+            queryParameters['travelDistanceUnit'] = travelDistanceUnit;
+        }
+
+        if (travelMode !== undefined) {
+            queryParameters['travelMode'] = travelMode;
+        }
+
+        if (sortBy !== undefined) {
+            queryParameters['sortBy'] = sortBy;
+        }
+
+        let useFormData = false;
+
+        let requestOptions: request.Options = {
+            method: 'GET',
+            qs: queryParameters,
+            headers: headerParams,
+            uri: localVarPath,
+            useQuerystring: this._useQuerystring,
+            json: true,
+        };
+
+
+   //return this.authentications.oAuth2Password.applyToRequest()
+    //.then((data)=>{
+
+
+       // this.authentications.default.applyToRequest(requestOptions);
+        requestOptions.headers = {"authorization":"Bearer " + this.oAuthCred.access_token};
+        if (Object.keys(formParams).length) {
+            if (useFormData) {
+                (<any>requestOptions).formData = formParams;
+            } else {
+                requestOptions.form = formParams;
+            }
+        }
+
+        return new Promise<{ response: http.IncomingMessage; body: GeoEnrichResponse;  }>((resolve, reject) => {
             request(requestOptions, (error, response, body) => {
                 if (error) {
                     reject(error);
@@ -3248,6 +3294,68 @@ export class LIAPIGeoEnrichServiceApi {
         }
 
         return new Promise<{ response: http.IncomingMessage; body: PlaceByLocations;  }>((resolve, reject) => {
+            request(requestOptions, (error, response, body) => {
+                if (error) {
+                    reject(error);
+                } else {
+                    if (response.statusCode >= 200 && response.statusCode <= 299) {
+                        resolve({ response: response, body: body });
+                    } else {
+                        reject(response);
+                    }
+                }
+            });
+        });
+
+
+   /* })
+    .catch((error) =>{
+    return Promise.reject(error);
+    });*/
+    }
+    /**
+     * Returns SIC Codes with their Industry Titles and Category Codes mapping
+     * Accepts first few partial digits or full SIC codes to filter the response
+     * @param sicCode Specify starting digits or full sic code to filter the response
+     */
+    public getSICMetadata (sicCode?: string) : Promise<{ response: http.IncomingMessage; body: GeoEnrichMetadataResponse;  }> {
+        const localVarPath = this.basePath + '/geoenrich/v1/metadata/sic';
+        let queryParameters: any = {};
+        let headerParams: any =  this.defaultHeaders;
+        let formParams: any = {};
+
+
+        if (sicCode !== undefined) {
+            queryParameters['sicCode'] = sicCode;
+        }
+
+        let useFormData = false;
+
+        let requestOptions: request.Options = {
+            method: 'GET',
+            qs: queryParameters,
+            headers: headerParams,
+            uri: localVarPath,
+            useQuerystring: this._useQuerystring,
+            json: true,
+        };
+
+
+   //return this.authentications.oAuth2Password.applyToRequest()
+    //.then((data)=>{
+
+
+       // this.authentications.default.applyToRequest(requestOptions);
+        requestOptions.headers = {"authorization":"Bearer " + this.oAuthCred.access_token};
+        if (Object.keys(formParams).length) {
+            if (useFormData) {
+                (<any>requestOptions).formData = formParams;
+            } else {
+                requestOptions.form = formParams;
+            }
+        }
+
+        return new Promise<{ response: http.IncomingMessage; body: GeoEnrichMetadataResponse;  }>((resolve, reject) => {
             request(requestOptions, (error, response, body) => {
                 if (error) {
                     reject(error);
@@ -4443,462 +4551,6 @@ export class LIAPIGeoLocationServiceApi {
         }
 
         return new Promise<{ response: http.IncomingMessage; body: GeoLocationAccessPoint;  }>((resolve, reject) => {
-            request(requestOptions, (error, response, body) => {
-                if (error) {
-                    reject(error);
-                } else {
-                    if (response.statusCode >= 200 && response.statusCode <= 299) {
-                        resolve({ response: response, body: body });
-                    } else {
-                        reject(response);
-                    }
-                }
-            });
-        });
-
-
-   /* })
-    .catch((error) =>{
-    return Promise.reject(error);
-    });*/
-    }
-}
-export enum LIAPIGeoPlacesServiceApiApiKeys {
-}
-
-export class LIAPIGeoPlacesServiceApi {
-    protected basePath = defaultBasePath;
-    protected defaultHeaders : any = {};
-    protected _useQuerystring : boolean = false;
-
-    protected authentications : OAuth;
-    protected  oAuthCred : oAuthCredInfo;
-
-    /*protected authentications = {
-       // 'default': <Authentication>new VoidAuth(),
-        'oAuth2Password': new OAuth(),
-    }
-
-    constructor(basePath?: string);
-    constructor(basePathOrUsername: string, password?: string, basePath?: string) {
-        if (password) {
-            if (basePath) {
-                this.basePath = basePath;
-            }
-        } else {
-            if (basePathOrUsername) {
-                this.basePath = basePathOrUsername
-            }
-        }
-    }*/
-
-    constructor(oAuthObj: oAuthCredInfo);
-    constructor(oAuthObj: oAuthCredInfo,basePath?: string)
-    {
-    if(oAuthObj)
-    {
-    this.oAuthCred=oAuthObj;
-    }
-    if (basePath) {
-    this.basePath = basePath;
-    }
-    }
-    set useQuerystring(value: boolean) {
-        this._useQuerystring = value;
-    }
-
-    public setApiKey(key: LIAPIGeoPlacesServiceApiApiKeys, value: string) {
-        this.authentications[LIAPIGeoPlacesServiceApiApiKeys[key]].apiKey = value;
-    }
-
-    set accessToken(token: string) {
-        this.authentications.objOAuthCredInfo.access_token = token;
-    }
-    
-    /**
-     * Returns Category Codes with their sub-categories (if exist), descriptions and SIC Codes mapping
-     * Accepts first partial digits or full category codes to filter the response
-     * @param categoryCode Specify starting digits or full category code to filter the response
-     */
-    public getCategoryCodeMetadata (categoryCode?: string) : Promise<{ response: http.IncomingMessage; body: GeoPlaceMetadataResponse;  }> {
-        const localVarPath = this.basePath + '/geoplaces/v1/metadata/category';
-        let queryParameters: any = {};
-        let headerParams: any =  this.defaultHeaders;
-        let formParams: any = {};
-
-
-        if (categoryCode !== undefined) {
-            queryParameters['categoryCode'] = categoryCode;
-        }
-
-        let useFormData = false;
-
-        let requestOptions: request.Options = {
-            method: 'GET',
-            qs: queryParameters,
-            headers: headerParams,
-            uri: localVarPath,
-            useQuerystring: this._useQuerystring,
-            json: true,
-        };
-
-
-   //return this.authentications.oAuth2Password.applyToRequest()
-    //.then((data)=>{
-
-
-       // this.authentications.default.applyToRequest(requestOptions);
-        requestOptions.headers = {"authorization":"Bearer " + this.oAuthCred.access_token};
-        if (Object.keys(formParams).length) {
-            if (useFormData) {
-                (<any>requestOptions).formData = formParams;
-            } else {
-                requestOptions.form = formParams;
-            }
-        }
-
-        return new Promise<{ response: http.IncomingMessage; body: GeoPlaceMetadataResponse;  }>((resolve, reject) => {
-            request(requestOptions, (error, response, body) => {
-                if (error) {
-                    reject(error);
-                } else {
-                    if (response.statusCode >= 200 && response.statusCode <= 299) {
-                        resolve({ response: response, body: body });
-                    } else {
-                        reject(response);
-                    }
-                }
-            });
-        });
-
-
-   /* })
-    .catch((error) =>{
-    return Promise.reject(error);
-    });*/
-    }
-    /**
-     * Point of Interests By Address.
-     * Accepts address as an input to retrieve nearby point of interests.
-     * @param address Address
-     * @param country Country
-     * @param name Matched against Name, BrandName and Trade Name. Partial terms are also matched with fuzziness (max edit distance is 1)
-     * @param type Matched against the content which defines the type of the poi. 
-     * @param categoryCode Specific Category/Categories Codes for the desired POIs. Accepts a mix of 4 digit (Top Category), 6 digit (Second-Level Category) and 11 digit (Low-Level Category) Category Codes. https://developer2.pitneybowes.com/docs/location-intelligence/v1/en/poicategory/LiApiPOICategoryCodes.xlsx 
-     * @param sicCode Specific SIC Codes/Codes for the desired POIs. Accepts a mix of 4 digit (Top Category) and 8 digit (Low-Level Category) SIC Codes.
-     * @param maxCandidates Maximum number of POIs that can be retrieved.
-     * @param searchRadius Radius range within which search is performed.
-     * @param searchRadiusUnit Radius unit such as Feet, Kilometers, Miles or Meters.
-     * @param travelTime Specifies the travel time within which method searches for results (POIs which can be reached within travel time)the search boundary in terms of time mentioned in &#39;travelTimeUnit&#39;. The results are retrieved from the polygon formed based on the travel time specified. This means search can be done in the mentioned time results be from the mentioned time.
-     * @param travelTimeUnit Specifies acceptable time units.Allowed values Minutes,Hours,Seconds and Milliseconds
-     * @param travelDistance Specifies the search boundary in terms of distance mentioned in &#39;travelDistanceUnit&#39;. The results are retrieved from the polygon formed based on the travel distance specified.
-     * @param travelDistanceUnit Specifies acceptable time units.Allowed values Feet,Kilometers,Miles and Meters
-     * @param travelMode Specifies the available mode of commute. This is required when u r trying to do search by travel distance or travel time. Allowed values driving and walking
-     * @param sortBy Specifies the order in which POIs are retrieved.
-     */
-    public getPOIsByAddress (address: string, country?: string, name?: string, type?: string, categoryCode?: string, sicCode?: string, maxCandidates?: string, searchRadius?: string, searchRadiusUnit?: string, travelTime?: string, travelTimeUnit?: string, travelDistance?: string, travelDistanceUnit?: string, travelMode?: string, sortBy?: string) : Promise<{ response: http.IncomingMessage; body: GeoplacesResponse;  }> {
-        const localVarPath = this.basePath + '/geoplaces/v1/poi/byaddress';
-        let queryParameters: any = {};
-        let headerParams: any =  this.defaultHeaders;
-        let formParams: any = {};
-
-
-        // verify required parameter 'address' is not null or undefined
-        if (address === null || address === undefined) {
-             return Promise.reject({ response: null, body: {errors:[{"errorCode":"Validation_Error",errorDescription:"Required parameter address was null or undefined when calling getPOIsByAddress."}]}})
-        }
-
-        if (address !== undefined) {
-            queryParameters['address'] = address;
-        }
-
-        if (country !== undefined) {
-            queryParameters['country'] = country;
-        }
-
-        if (name !== undefined) {
-            queryParameters['name'] = name;
-        }
-
-        if (type !== undefined) {
-            queryParameters['type'] = type;
-        }
-
-        if (categoryCode !== undefined) {
-            queryParameters['categoryCode'] = categoryCode;
-        }
-
-        if (sicCode !== undefined) {
-            queryParameters['sicCode'] = sicCode;
-        }
-
-        if (maxCandidates !== undefined) {
-            queryParameters['maxCandidates'] = maxCandidates;
-        }
-
-        if (searchRadius !== undefined) {
-            queryParameters['searchRadius'] = searchRadius;
-        }
-
-        if (searchRadiusUnit !== undefined) {
-            queryParameters['searchRadiusUnit'] = searchRadiusUnit;
-        }
-
-        if (travelTime !== undefined) {
-            queryParameters['travelTime'] = travelTime;
-        }
-
-        if (travelTimeUnit !== undefined) {
-            queryParameters['travelTimeUnit'] = travelTimeUnit;
-        }
-
-        if (travelDistance !== undefined) {
-            queryParameters['travelDistance'] = travelDistance;
-        }
-
-        if (travelDistanceUnit !== undefined) {
-            queryParameters['travelDistanceUnit'] = travelDistanceUnit;
-        }
-
-        if (travelMode !== undefined) {
-            queryParameters['travelMode'] = travelMode;
-        }
-
-        if (sortBy !== undefined) {
-            queryParameters['sortBy'] = sortBy;
-        }
-
-        let useFormData = false;
-
-        let requestOptions: request.Options = {
-            method: 'GET',
-            qs: queryParameters,
-            headers: headerParams,
-            uri: localVarPath,
-            useQuerystring: this._useQuerystring,
-            json: true,
-        };
-
-
-   //return this.authentications.oAuth2Password.applyToRequest()
-    //.then((data)=>{
-
-
-       // this.authentications.default.applyToRequest(requestOptions);
-        requestOptions.headers = {"authorization":"Bearer " + this.oAuthCred.access_token};
-        if (Object.keys(formParams).length) {
-            if (useFormData) {
-                (<any>requestOptions).formData = formParams;
-            } else {
-                requestOptions.form = formParams;
-            }
-        }
-
-        return new Promise<{ response: http.IncomingMessage; body: GeoplacesResponse;  }>((resolve, reject) => {
-            request(requestOptions, (error, response, body) => {
-                if (error) {
-                    reject(error);
-                } else {
-                    if (response.statusCode >= 200 && response.statusCode <= 299) {
-                        resolve({ response: response, body: body });
-                    } else {
-                        reject(response);
-                    }
-                }
-            });
-        });
-
-
-   /* })
-    .catch((error) =>{
-    return Promise.reject(error);
-    });*/
-    }
-    /**
-     * Point of Interests By Location.
-     * Accepts longitude and latitude as an input to retrieve nearby point of interests.
-     * @param longitude Longitude of the location.
-     * @param latitude Latitude of the location.
-     * @param name Matched against Name, BrandName and Trade Name. Partial terms are also matched with fuzziness (max edit distance is 1)
-     * @param type Matched against the content which defines the type of the poi. 
-     * @param categoryCode Specific Category/Categories Codes for the desired POIs. Accepts a mix of 4 digit (Top Category), 6 digit (Second-Level Category) and 11 digit (Low-Level Category) Category Codes. https://locate.pitneybowes.com/docs/location-intelligence/v1/en/poicategory/LiApiPOICategoryCodes.xlsx 
-     * @param sicCode Specific SIC Codes/Codes for the desired POIs. Accepts a mix of 4 digit (Top Category) and 8 digit (Low-Level Category) SIC Codes.
-     * @param maxCandidates Maximum number of POIs that can be retrieved.
-     * @param searchRadius Radius range within which search is performed.
-     * @param searchRadiusUnit Radius unit such as Feet, Kilometers, Miles or Meters.
-     * @param travelTime Specifies the travel time within which method searches for results (POIs which can be reached within travel time)the search boundary in terms of time mentioned in &#39;travelTimeUnit&#39;. The results are retrieved from the polygon formed based on the travel time specified. This means search can be done in the mentioned time results be from the mentioned time.
-     * @param travelTimeUnit Specifies acceptable time units.Allowed values Minutes,Hours,Seconds and Milliseconds
-     * @param travelDistance Specifies the search boundary in terms of distance mentioned in &#39;travelDistanceUnit&#39;. The results are retrieved from the polygon formed based on the travel distance specified.
-     * @param travelDistanceUnit Specifies acceptable time units.Allowed values Feet,Kilometers,Miles and Meters
-     * @param travelMode Specifies the available mode of commute. This is required when u r trying to do search by travel distance or travel time. Allowed values driving and walking
-     * @param sortBy Specifies the order in which POIs are retrieved.
-     */
-    public getPOIsByLocation (longitude: string, latitude: string, name?: string, type?: string, categoryCode?: string, sicCode?: string, maxCandidates?: string, searchRadius?: string, searchRadiusUnit?: string, travelTime?: string, travelTimeUnit?: string, travelDistance?: string, travelDistanceUnit?: string, travelMode?: string, sortBy?: string) : Promise<{ response: http.IncomingMessage; body: GeoplacesResponse;  }> {
-        const localVarPath = this.basePath + '/geoplaces/v1/poi/bylocation';
-        let queryParameters: any = {};
-        let headerParams: any =  this.defaultHeaders;
-        let formParams: any = {};
-
-
-        // verify required parameter 'longitude' is not null or undefined
-        if (longitude === null || longitude === undefined) {
-             return Promise.reject({ response: null, body: {errors:[{"errorCode":"Validation_Error",errorDescription:"Required parameter longitude was null or undefined when calling getPOIsByLocation."}]}})
-        }
-
-        // verify required parameter 'latitude' is not null or undefined
-        if (latitude === null || latitude === undefined) {
-             return Promise.reject({ response: null, body: {errors:[{"errorCode":"Validation_Error",errorDescription:"Required parameter latitude was null or undefined when calling getPOIsByLocation."}]}})
-        }
-
-        if (longitude !== undefined) {
-            queryParameters['longitude'] = longitude;
-        }
-
-        if (latitude !== undefined) {
-            queryParameters['latitude'] = latitude;
-        }
-
-        if (name !== undefined) {
-            queryParameters['name'] = name;
-        }
-
-        if (type !== undefined) {
-            queryParameters['type'] = type;
-        }
-
-        if (categoryCode !== undefined) {
-            queryParameters['categoryCode'] = categoryCode;
-        }
-
-        if (sicCode !== undefined) {
-            queryParameters['sicCode'] = sicCode;
-        }
-
-        if (maxCandidates !== undefined) {
-            queryParameters['maxCandidates'] = maxCandidates;
-        }
-
-        if (searchRadius !== undefined) {
-            queryParameters['searchRadius'] = searchRadius;
-        }
-
-        if (searchRadiusUnit !== undefined) {
-            queryParameters['searchRadiusUnit'] = searchRadiusUnit;
-        }
-
-        if (travelTime !== undefined) {
-            queryParameters['travelTime'] = travelTime;
-        }
-
-        if (travelTimeUnit !== undefined) {
-            queryParameters['travelTimeUnit'] = travelTimeUnit;
-        }
-
-        if (travelDistance !== undefined) {
-            queryParameters['travelDistance'] = travelDistance;
-        }
-
-        if (travelDistanceUnit !== undefined) {
-            queryParameters['travelDistanceUnit'] = travelDistanceUnit;
-        }
-
-        if (travelMode !== undefined) {
-            queryParameters['travelMode'] = travelMode;
-        }
-
-        if (sortBy !== undefined) {
-            queryParameters['sortBy'] = sortBy;
-        }
-
-        let useFormData = false;
-
-        let requestOptions: request.Options = {
-            method: 'GET',
-            qs: queryParameters,
-            headers: headerParams,
-            uri: localVarPath,
-            useQuerystring: this._useQuerystring,
-            json: true,
-        };
-
-
-   //return this.authentications.oAuth2Password.applyToRequest()
-    //.then((data)=>{
-
-
-       // this.authentications.default.applyToRequest(requestOptions);
-        requestOptions.headers = {"authorization":"Bearer " + this.oAuthCred.access_token};
-        if (Object.keys(formParams).length) {
-            if (useFormData) {
-                (<any>requestOptions).formData = formParams;
-            } else {
-                requestOptions.form = formParams;
-            }
-        }
-
-        return new Promise<{ response: http.IncomingMessage; body: GeoplacesResponse;  }>((resolve, reject) => {
-            request(requestOptions, (error, response, body) => {
-                if (error) {
-                    reject(error);
-                } else {
-                    if (response.statusCode >= 200 && response.statusCode <= 299) {
-                        resolve({ response: response, body: body });
-                    } else {
-                        reject(response);
-                    }
-                }
-            });
-        });
-
-
-   /* })
-    .catch((error) =>{
-    return Promise.reject(error);
-    });*/
-    }
-    /**
-     * Returns SIC Codes with their Industry Titles and Category Codes mapping
-     * Accepts first few partial digits or full SIC codes to filter the response
-     * @param sicCode Specify starting digits or full sic code to filter the response
-     */
-    public getSICMetadata (sicCode?: string) : Promise<{ response: http.IncomingMessage; body: GeoPlaceMetadataResponse;  }> {
-        const localVarPath = this.basePath + '/geoplaces/v1/metadata/sic';
-        let queryParameters: any = {};
-        let headerParams: any =  this.defaultHeaders;
-        let formParams: any = {};
-
-
-        if (sicCode !== undefined) {
-            queryParameters['sicCode'] = sicCode;
-        }
-
-        let useFormData = false;
-
-        let requestOptions: request.Options = {
-            method: 'GET',
-            qs: queryParameters,
-            headers: headerParams,
-            uri: localVarPath,
-            useQuerystring: this._useQuerystring,
-            json: true,
-        };
-
-
-   //return this.authentications.oAuth2Password.applyToRequest()
-    //.then((data)=>{
-
-
-       // this.authentications.default.applyToRequest(requestOptions);
-        requestOptions.headers = {"authorization":"Bearer " + this.oAuthCred.access_token};
-        if (Object.keys(formParams).length) {
-            if (useFormData) {
-                (<any>requestOptions).formData = formParams;
-            } else {
-                requestOptions.form = formParams;
-            }
-        }
-
-        return new Promise<{ response: http.IncomingMessage; body: GeoPlaceMetadataResponse;  }>((resolve, reject) => {
             request(requestOptions, (error, response, body) => {
                 if (error) {
                     reject(error);

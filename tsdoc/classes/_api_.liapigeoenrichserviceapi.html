@@ -103,9 +103,11 @@
 						<section class="tsd-index-section ">
 							<h3>Methods</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-method tsd-parent-kind-class"><a href="_api_.liapigeoenrichserviceapi.html#getaddress" class="tsd-kind-icon">get<wbr>Address</a></li>
-								<li class="tsd-kind-method tsd-parent-kind-class"><a href="_api_.liapigeoenrichserviceapi.html#getentitybylocation" class="tsd-kind-icon">get<wbr>Entity<wbr>ByLocation</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="_api_.liapigeoenrichserviceapi.html#getcategorycodemetadata" class="tsd-kind-icon">get<wbr>Category<wbr>Code<wbr>Metadata</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="_api_.liapigeoenrichserviceapi.html#getpoisbyaddress" class="tsd-kind-icon">getPOIs<wbr>ByAddress</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="_api_.liapigeoenrichserviceapi.html#getpoisbylocation" class="tsd-kind-icon">getPOIs<wbr>ByLocation</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class"><a href="_api_.liapigeoenrichserviceapi.html#getplacebylocation" class="tsd-kind-icon">get<wbr>Place<wbr>ByLocation</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="_api_.liapigeoenrichserviceapi.html#getsicmetadata" class="tsd-kind-icon">getSICMetadata</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class"><a href="_api_.liapigeoenrichserviceapi.html#setapikey" class="tsd-kind-icon">set<wbr>Api<wbr>Key</a></li>
 							</ul>
 						</section>
@@ -124,7 +126,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in api.ts:2921</li>
+									<li>Defined in api.ts:2850</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -146,7 +148,7 @@
 					<div class="tsd-signature tsd-kind-icon">_use<wbr>Querystring<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol"> =&nbsp;false</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in api.ts:2918</li>
+							<li>Defined in api.ts:2847</li>
 						</ul>
 					</aside>
 				</section>
@@ -156,7 +158,7 @@
 					<div class="tsd-signature tsd-kind-icon">authentications<span class="tsd-signature-symbol">:</span> <a href="_api_.oauth.html" class="tsd-signature-type">OAuth</a></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in api.ts:2920</li>
+							<li>Defined in api.ts:2849</li>
 						</ul>
 					</aside>
 				</section>
@@ -166,7 +168,7 @@
 					<div class="tsd-signature tsd-kind-icon">base<wbr>Path<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> =&nbsp;defaultBasePath</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in api.ts:2916</li>
+							<li>Defined in api.ts:2845</li>
 						</ul>
 					</aside>
 				</section>
@@ -176,7 +178,7 @@
 					<div class="tsd-signature tsd-kind-icon">default<wbr>Headers<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">any</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in api.ts:2917</li>
+							<li>Defined in api.ts:2846</li>
 						</ul>
 					</aside>
 				</section>
@@ -186,7 +188,7 @@
 					<div class="tsd-signature tsd-kind-icon">o<wbr>Auth<wbr>Cred<span class="tsd-signature-symbol">:</span> <a href="_api_.oauthcredinfo.html" class="tsd-signature-type">oAuthCredInfo</a></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in api.ts:2921</li>
+							<li>Defined in api.ts:2850</li>
 						</ul>
 					</aside>
 				</section>
@@ -203,7 +205,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in api.ts:2960</li>
+									<li>Defined in api.ts:2889</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -226,7 +228,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in api.ts:2952</li>
+									<li>Defined in api.ts:2881</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -243,48 +245,30 @@
 			<section class="tsd-panel-group tsd-member-group ">
 				<h2>Methods</h2>
 				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
-					<a name="getaddress" class="tsd-anchor"></a>
-					<h3>get<wbr>Address</h3>
+					<a name="getcategorycodemetadata" class="tsd-anchor"></a>
+					<h3>get<wbr>Category<wbr>Code<wbr>Metadata</h3>
 					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
-						<li class="tsd-signature tsd-kind-icon">get<wbr>Address<span class="tsd-signature-symbol">(</span>latitude<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, longitude<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, searchRadius<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">string</span>, searchRadiusUnit<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span></li>
+						<li class="tsd-signature tsd-kind-icon">get<wbr>Category<wbr>Code<wbr>Metadata<span class="tsd-signature-symbol">(</span>categoryCode<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in api.ts:2972</li>
+									<li>Defined in api.ts:2898</li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
 								<div class="lead">
-									<p>Address By Location.
-									This service accepts longitude and latitude as input and returns an address for that location.</p>
+									<p>Returns Category Codes with their sub-categories (if exist), descriptions and SIC Codes mapping
+									Accepts first partial digits or full category codes to filter the response</p>
 								</div>
 							</div>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
-									<h5>latitude: <span class="tsd-signature-type">string</span></h5>
+									<h5><span class="tsd-flag ts-flagOptional">Optional</span> categoryCode: <span class="tsd-signature-type">string</span></h5>
 									<div class="tsd-comment tsd-typography">
-										<p>Latitude of the location.</p>
-									</div>
-								</li>
-								<li>
-									<h5>longitude: <span class="tsd-signature-type">string</span></h5>
-									<div class="tsd-comment tsd-typography">
-										<p>Longitude of the location.</p>
-									</div>
-								</li>
-								<li>
-									<h5><span class="tsd-flag ts-flagOptional">Optional</span> searchRadius: <span class="tsd-signature-type">string</span></h5>
-									<div class="tsd-comment tsd-typography">
-										<p>Radius range within which search is performed.</p>
-									</div>
-								</li>
-								<li>
-									<h5><span class="tsd-flag ts-flagOptional">Optional</span> searchRadiusUnit: <span class="tsd-signature-type">string</span></h5>
-									<div class="tsd-comment tsd-typography">
-										<p>Radius unit such as feet, kilometers, miles or meters.</p>
+										<p>Specify starting digits or full category code to filter the response</p>
 									</div>
 								</li>
 							</ul>
@@ -293,48 +277,60 @@
 					</ul>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
-					<a name="getentitybylocation" class="tsd-anchor"></a>
-					<h3>get<wbr>Entity<wbr>ByLocation</h3>
+					<a name="getpoisbyaddress" class="tsd-anchor"></a>
+					<h3>getPOIs<wbr>ByAddress</h3>
 					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
-						<li class="tsd-signature tsd-kind-icon">get<wbr>Entity<wbr>ByLocation<span class="tsd-signature-symbol">(</span>longitude<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, latitude<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, brandName<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">string</span>, category<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">string</span>, maxCandidates<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">string</span>, searchRadius<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">string</span>, searchRadiusUnit<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">string</span>, searchDataset<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">string</span>, searchPriority<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">string</span>, travelTime<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">string</span>, travelTimeUnit<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">string</span>, travelDistance<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">string</span>, travelDistanceUnit<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">string</span>, mode<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span></li>
+						<li class="tsd-signature tsd-kind-icon">getPOIs<wbr>ByAddress<span class="tsd-signature-symbol">(</span>address<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, country<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">string</span>, name<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">string</span>, type<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">string</span>, categoryCode<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">string</span>, sicCode<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">string</span>, maxCandidates<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">string</span>, searchRadius<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">string</span>, searchRadiusUnit<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">string</span>, travelTime<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">string</span>, travelTimeUnit<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">string</span>, travelDistance<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">string</span>, travelDistanceUnit<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">string</span>, travelMode<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">string</span>, sortBy<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in api.ts:3069</li>
+									<li>Defined in api.ts:2974</li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
 								<div class="lead">
-									<p>Points Of Interest By Location.
-									Identifies and retrieves Points of Interest that exist around a specific location (ordered by distance from the location).</p>
+									<p>Point of Interests By Address.
+									Accepts address as an input to retrieve nearby point of interests.</p>
 								</div>
 							</div>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
-									<h5>longitude: <span class="tsd-signature-type">string</span></h5>
+									<h5>address: <span class="tsd-signature-type">string</span></h5>
 									<div class="tsd-comment tsd-typography">
-										<p>Longitude of the location.</p>
+										<p>Address</p>
 									</div>
 								</li>
 								<li>
-									<h5>latitude: <span class="tsd-signature-type">string</span></h5>
+									<h5><span class="tsd-flag ts-flagOptional">Optional</span> country: <span class="tsd-signature-type">string</span></h5>
 									<div class="tsd-comment tsd-typography">
-										<p>Latitude of the location.</p>
+										<p>Country</p>
 									</div>
 								</li>
 								<li>
-									<h5><span class="tsd-flag ts-flagOptional">Optional</span> brandName: <span class="tsd-signature-type">string</span></h5>
+									<h5><span class="tsd-flag ts-flagOptional">Optional</span> name: <span class="tsd-signature-type">string</span></h5>
 									<div class="tsd-comment tsd-typography">
-										<p>Specifies the name of the brand to be searched. Also performs search on partially specified brand names.</p>
+										<p>Matched against Name, BrandName and Trade Name. Partial terms are also matched with fuzziness (max edit distance is 1)</p>
 									</div>
 								</li>
 								<li>
-									<h5><span class="tsd-flag ts-flagOptional">Optional</span> category: <span class="tsd-signature-type">string</span></h5>
+									<h5><span class="tsd-flag ts-flagOptional">Optional</span> type: <span class="tsd-signature-type">string</span></h5>
 									<div class="tsd-comment tsd-typography">
-										<p>Specific Category/Categories for which the POI search is performed. (Categories 10020102,10020103 are for Chinese and Italian Restaurants .<a href="https://developer2.pitneybowes.com/docs/location-intelligence/v1/en/poicategory/EightDigitPOICategoryCodes.xlsx">https://developer2.pitneybowes.com/docs/location-intelligence/v1/en/poicategory/EightDigitPOICategoryCodes.xlsx</a></p>
+										<p>Matched against the content which defines the type of the poi.</p>
+									</div>
+								</li>
+								<li>
+									<h5><span class="tsd-flag ts-flagOptional">Optional</span> categoryCode: <span class="tsd-signature-type">string</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>Specific Category/Categories Codes for the desired POIs. Accepts a mix of 4 digit (Top Category), 6 digit (Second-Level Category) and 11 digit (Low-Level Category) Category Codes. <a href="https://developer2.pitneybowes.com/docs/location-intelligence/v1/en/poicategory/LiApiPOICategoryCodes.xlsx">https://developer2.pitneybowes.com/docs/location-intelligence/v1/en/poicategory/LiApiPOICategoryCodes.xlsx</a></p>
+									</div>
+								</li>
+								<li>
+									<h5><span class="tsd-flag ts-flagOptional">Optional</span> sicCode: <span class="tsd-signature-type">string</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>Specific SIC Codes/Codes for the desired POIs. Accepts a mix of 4 digit (Top Category) and 8 digit (Low-Level Category) SIC Codes.</p>
 									</div>
 								</li>
 								<li>
@@ -353,18 +349,6 @@
 									<h5><span class="tsd-flag ts-flagOptional">Optional</span> searchRadiusUnit: <span class="tsd-signature-type">string</span></h5>
 									<div class="tsd-comment tsd-typography">
 										<p>Radius unit such as Feet, Kilometers, Miles or Meters.</p>
-									</div>
-								</li>
-								<li>
-									<h5><span class="tsd-flag ts-flagOptional">Optional</span> searchDataset: <span class="tsd-signature-type">string</span></h5>
-									<div class="tsd-comment tsd-typography">
-										<p>The datasets upon which the POI search can be performed.</p>
-									</div>
-								</li>
-								<li>
-									<h5><span class="tsd-flag ts-flagOptional">Optional</span> searchPriority: <span class="tsd-signature-type">string</span></h5>
-									<div class="tsd-comment tsd-typography">
-										<p>Search order of POI datasets mentioned in searchDataset.</p>
 									</div>
 								</li>
 								<li>
@@ -392,9 +376,131 @@
 									</div>
 								</li>
 								<li>
-									<h5><span class="tsd-flag ts-flagOptional">Optional</span> mode: <span class="tsd-signature-type">string</span></h5>
+									<h5><span class="tsd-flag ts-flagOptional">Optional</span> travelMode: <span class="tsd-signature-type">string</span></h5>
 									<div class="tsd-comment tsd-typography">
-										<p>Specifies the available mode of commute. This is required when u r trying to do search by travel distance or travel time.Allowed values driving and walking</p>
+										<p>Specifies the available mode of commute. This is required when u r trying to do search by travel distance or travel time. Allowed values driving and walking</p>
+									</div>
+								</li>
+								<li>
+									<h5><span class="tsd-flag ts-flagOptional">Optional</span> sortBy: <span class="tsd-signature-type">string</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>Specifies the order in which POIs are retrieved.</p>
+									</div>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+					<a name="getpoisbylocation" class="tsd-anchor"></a>
+					<h3>getPOIs<wbr>ByLocation</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">getPOIs<wbr>ByLocation<span class="tsd-signature-symbol">(</span>longitude<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, latitude<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, name<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">string</span>, type<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">string</span>, categoryCode<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">string</span>, sicCode<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">string</span>, maxCandidates<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">string</span>, searchRadius<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">string</span>, searchRadiusUnit<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">string</span>, travelTime<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">string</span>, travelTimeUnit<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">string</span>, travelDistance<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">string</span>, travelDistanceUnit<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">string</span>, travelMode<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">string</span>, sortBy<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in api.ts:3111</li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Point of Interests By Location.
+									Accepts longitude and latitude as an input to retrieve nearby point of interests.</p>
+								</div>
+							</div>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>longitude: <span class="tsd-signature-type">string</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>Longitude of the location.</p>
+									</div>
+								</li>
+								<li>
+									<h5>latitude: <span class="tsd-signature-type">string</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>Latitude of the location.</p>
+									</div>
+								</li>
+								<li>
+									<h5><span class="tsd-flag ts-flagOptional">Optional</span> name: <span class="tsd-signature-type">string</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>Matched against Name, BrandName and Trade Name. Partial terms are also matched with fuzziness (max edit distance is 1)</p>
+									</div>
+								</li>
+								<li>
+									<h5><span class="tsd-flag ts-flagOptional">Optional</span> type: <span class="tsd-signature-type">string</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>Matched against the content which defines the type of the poi.</p>
+									</div>
+								</li>
+								<li>
+									<h5><span class="tsd-flag ts-flagOptional">Optional</span> categoryCode: <span class="tsd-signature-type">string</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>Specific Category/Categories Codes for the desired POIs. Accepts a mix of 4 digit (Top Category), 6 digit (Second-Level Category) and 11 digit (Low-Level Category) Category Codes. <a href="https://locate.pitneybowes.com/docs/location-intelligence/v1/en/poicategory/LiApiPOICategoryCodes.xlsx">https://locate.pitneybowes.com/docs/location-intelligence/v1/en/poicategory/LiApiPOICategoryCodes.xlsx</a></p>
+									</div>
+								</li>
+								<li>
+									<h5><span class="tsd-flag ts-flagOptional">Optional</span> sicCode: <span class="tsd-signature-type">string</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>Specific SIC Codes/Codes for the desired POIs. Accepts a mix of 4 digit (Top Category) and 8 digit (Low-Level Category) SIC Codes.</p>
+									</div>
+								</li>
+								<li>
+									<h5><span class="tsd-flag ts-flagOptional">Optional</span> maxCandidates: <span class="tsd-signature-type">string</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>Maximum number of POIs that can be retrieved.</p>
+									</div>
+								</li>
+								<li>
+									<h5><span class="tsd-flag ts-flagOptional">Optional</span> searchRadius: <span class="tsd-signature-type">string</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>Radius range within which search is performed.</p>
+									</div>
+								</li>
+								<li>
+									<h5><span class="tsd-flag ts-flagOptional">Optional</span> searchRadiusUnit: <span class="tsd-signature-type">string</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>Radius unit such as Feet, Kilometers, Miles or Meters.</p>
+									</div>
+								</li>
+								<li>
+									<h5><span class="tsd-flag ts-flagOptional">Optional</span> travelTime: <span class="tsd-signature-type">string</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>Specifies the travel time within which method searches for results (POIs which can be reached within travel time)the search boundary in terms of time mentioned in &#39;travelTimeUnit&#39;. The results are retrieved from the polygon formed based on the travel time specified. This means search can be done in the mentioned time results be from the mentioned time.</p>
+									</div>
+								</li>
+								<li>
+									<h5><span class="tsd-flag ts-flagOptional">Optional</span> travelTimeUnit: <span class="tsd-signature-type">string</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>Specifies acceptable time units.Allowed values Minutes,Hours,Seconds and Milliseconds</p>
+									</div>
+								</li>
+								<li>
+									<h5><span class="tsd-flag ts-flagOptional">Optional</span> travelDistance: <span class="tsd-signature-type">string</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>Specifies the search boundary in terms of distance mentioned in &#39;travelDistanceUnit&#39;. The results are retrieved from the polygon formed based on the travel distance specified.</p>
+									</div>
+								</li>
+								<li>
+									<h5><span class="tsd-flag ts-flagOptional">Optional</span> travelDistanceUnit: <span class="tsd-signature-type">string</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>Specifies acceptable time units.Allowed values Feet,Kilometers,Miles and Meters</p>
+									</div>
+								</li>
+								<li>
+									<h5><span class="tsd-flag ts-flagOptional">Optional</span> travelMode: <span class="tsd-signature-type">string</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>Specifies the available mode of commute. This is required when u r trying to do search by travel distance or travel time. Allowed values driving and walking</p>
+									</div>
+								</li>
+								<li>
+									<h5><span class="tsd-flag ts-flagOptional">Optional</span> sortBy: <span class="tsd-signature-type">string</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>Specifies the order in which POIs are retrieved.</p>
 									</div>
 								</li>
 							</ul>
@@ -412,7 +518,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in api.ts:3195</li>
+									<li>Defined in api.ts:3241</li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -447,6 +553,38 @@
 					</ul>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+					<a name="getsicmetadata" class="tsd-anchor"></a>
+					<h3>getSICMetadata</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">getSICMetadata<span class="tsd-signature-symbol">(</span>sicCode<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in api.ts:3321</li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Returns SIC Codes with their Industry Titles and Category Codes mapping
+									Accepts first few partial digits or full SIC codes to filter the response</p>
+								</div>
+							</div>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5><span class="tsd-flag ts-flagOptional">Optional</span> sicCode: <span class="tsd-signature-type">string</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>Specify starting digits or full sic code to filter the response</p>
+									</div>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
 					<a name="setapikey" class="tsd-anchor"></a>
 					<h3>set<wbr>Api<wbr>Key</h3>
 					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
@@ -456,7 +594,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in api.ts:2956</li>
+									<li>Defined in api.ts:2885</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -517,13 +655,19 @@
 								<a href="_api_.liapigeoenrichserviceapi.html#usequerystring" class="tsd-kind-icon">use<wbr>Querystring</a>
 							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-class">
-								<a href="_api_.liapigeoenrichserviceapi.html#getaddress" class="tsd-kind-icon">get<wbr>Address</a>
+								<a href="_api_.liapigeoenrichserviceapi.html#getcategorycodemetadata" class="tsd-kind-icon">get<wbr>Category<wbr>Code<wbr>Metadata</a>
 							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-class">
-								<a href="_api_.liapigeoenrichserviceapi.html#getentitybylocation" class="tsd-kind-icon">get<wbr>Entity<wbr>ByLocation</a>
+								<a href="_api_.liapigeoenrichserviceapi.html#getpoisbyaddress" class="tsd-kind-icon">getPOIs<wbr>ByAddress</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="_api_.liapigeoenrichserviceapi.html#getpoisbylocation" class="tsd-kind-icon">getPOIs<wbr>ByLocation</a>
 							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-class">
 								<a href="_api_.liapigeoenrichserviceapi.html#getplacebylocation" class="tsd-kind-icon">get<wbr>Place<wbr>ByLocation</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="_api_.liapigeoenrichserviceapi.html#getsicmetadata" class="tsd-kind-icon">getSICMetadata</a>
 							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-class">
 								<a href="_api_.liapigeoenrichserviceapi.html#setapikey" class="tsd-kind-icon">set<wbr>Api<wbr>Key</a>
