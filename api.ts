@@ -3340,7 +3340,7 @@ export class LIAPIGeoEnrichServiceApi {
      * Accepts longitude and latitude as an input to retrieve nearby points of interest.
      * @param longitude Longitude of the location.
      * @param latitude Latitude of the location.
-     * @param name Matched against Name, BrandName and Trade Name. Partial terms are also matched with fuzziness (max edit distance is 1)
+     * @param searchText Matched against Name, BrandName and Trade Name. Partial terms are also matched with fuzziness (max edit distance is 1)
      * @param type Matched against the content which defines the type of the poi. 
      * @param categoryCode Specific Category/Categories Codes for the desired POIs. Accepts a mix of 4 digit (Top Category), 6 digit (Second-Level Category) and 11 digit (Low-Level Category) Category Codes. https://locate.pitneybowes.com/downloads/location-intelligence/v1/CategoryCodes.xlsx 
      * @param sicCode Specific SIC Codes/Codes for the desired POIs. Accepts a mix of 4 digit (Top Category) and 8 digit (Low-Level Category) SIC Codes.
@@ -3355,8 +3355,9 @@ export class LIAPIGeoEnrichServiceApi {
      * @param sortBy Specifies the order in which POIs are retrieved.
      * @param fuzzyOnName Allowed values are Y/N. If N, the search on name will not allow fuzziness.
      * @param page Will support pagination, by default 1st page with maxCandidates results are returned.
+     * @param searchOnNameOnly search name description
      */
-    public getPOIsByLocation (longitude: string, latitude: string, name?: string, type?: string, categoryCode?: string, sicCode?: string, maxCandidates?: string, searchRadius?: string, searchRadiusUnit?: string, travelTime?: string, travelTimeUnit?: string, travelDistance?: string, travelDistanceUnit?: string, travelMode?: string, sortBy?: string, fuzzyOnName?: string, page?: string) : Promise<{ response: http.IncomingMessage; body: GeoEnrichResponse;  }> {
+    public getPOIsByLocation (longitude: string, latitude: string, searchText?: string, type?: string, categoryCode?: string, sicCode?: string, maxCandidates?: string, searchRadius?: string, searchRadiusUnit?: string, travelTime?: string, travelTimeUnit?: string, travelDistance?: string, travelDistanceUnit?: string, travelMode?: string, sortBy?: string, fuzzyOnName?: string, page?: string, searchOnNameOnly?: string) : Promise<{ response: http.IncomingMessage; body: GeoEnrichResponse;  }> {
         const localVarPath = this.basePath + '/geoenrich/v1/poi/bylocation';
         let queryParameters: any = {};
         let headerParams: any =  this.defaultHeaders;
@@ -3381,8 +3382,8 @@ export class LIAPIGeoEnrichServiceApi {
             queryParameters['latitude'] = latitude;
         }
 
-        if (name !== undefined) {
-            queryParameters['name'] = name;
+        if (searchText !== undefined) {
+            queryParameters['searchText'] = searchText;
         }
 
         if (type !== undefined) {
@@ -3439,6 +3440,10 @@ export class LIAPIGeoEnrichServiceApi {
 
         if (page !== undefined) {
             queryParameters['page'] = page;
+        }
+
+        if (searchOnNameOnly !== undefined) {
+            queryParameters['searchOnNameOnly'] = searchOnNameOnly;
         }
 
         let useFormData = false;
@@ -3641,7 +3646,7 @@ export class LIAPIGeoEnrichServiceApi {
      * POIs-Autocomplete will return POIs predictions based on the full or partial words specified in the search.The search can then be narrowed based on Location, IP Address or Country along with other supporting filters.
      * @param longitude Longitude of the location.
      * @param latitude Latitude of the location.
-     * @param name Matched against Name, BrandName and Trade Name. Partial terms are also matched with fuzziness (max edit distance is 1)
+     * @param searchText Matched against Name, BrandName and Trade Name. Partial terms are also matched with fuzziness (max edit distance is 1)
      * @param searchRadius Radius range within which search is performed.
      * @param searchRadiusUnit Radius unit such as Feet, Kilometers, Miles or Meters.
      * @param travelTime Specifies the travel time within which method searches for results (POIs which can be reached within travel time)the search boundary in terms of time mentioned in &#39;travelTimeUnit&#39;. The results are retrieved from the polygon formed based on the travel time specified. This means search can be done in the mentioned time results be from the mentioned time.
@@ -3661,8 +3666,9 @@ export class LIAPIGeoEnrichServiceApi {
      * @param sicCode Specific SIC Codes/Codes for the desired POIs. Accepts a mix of 4 digit (Top Category) and 8 digit (Low-Level Category) SIC Codes.
      * @param maxCandidates Maximum number of POIs that can be retrieved.
      * @param sortBy Specifies the order in which POIs are retrieved.
+     * @param searchOnNameOnly specifies search on name
      */
-    public poisAutocomplete (longitude?: string, latitude?: string, name?: string, searchRadius?: string, searchRadiusUnit?: string, travelTime?: string, travelTimeUnit?: string, travelDistance?: string, travelDistanceUnit?: string, travelMode?: string, country?: string, areaName1?: string, areaName3?: string, postcode1?: string, postcode2?: string, ipAddress?: string, autoDetectLocation?: string, type?: string, categoryCode?: string, sicCode?: string, maxCandidates?: string, sortBy?: string) : Promise<{ response: http.IncomingMessage; body: GeoEnrichResponse;  }> {
+    public poisAutocomplete (longitude?: string, latitude?: string, searchText?: string, searchRadius?: string, searchRadiusUnit?: string, travelTime?: string, travelTimeUnit?: string, travelDistance?: string, travelDistanceUnit?: string, travelMode?: string, country?: string, areaName1?: string, areaName3?: string, postcode1?: string, postcode2?: string, ipAddress?: string, autoDetectLocation?: string, type?: string, categoryCode?: string, sicCode?: string, maxCandidates?: string, sortBy?: string, searchOnNameOnly?: string) : Promise<{ response: http.IncomingMessage; body: GeoEnrichResponse;  }> {
         const localVarPath = this.basePath + '/geoenrich/v1/poi/autocomplete';
         let queryParameters: any = {};
         let headerParams: any =  this.defaultHeaders;
@@ -3677,8 +3683,8 @@ export class LIAPIGeoEnrichServiceApi {
             queryParameters['latitude'] = latitude;
         }
 
-        if (name !== undefined) {
-            queryParameters['name'] = name;
+        if (searchText !== undefined) {
+            queryParameters['searchText'] = searchText;
         }
 
         if (searchRadius !== undefined) {
@@ -3755,6 +3761,10 @@ export class LIAPIGeoEnrichServiceApi {
 
         if (sortBy !== undefined) {
             queryParameters['sortBy'] = sortBy;
+        }
+
+        if (searchOnNameOnly !== undefined) {
+            queryParameters['searchOnNameOnly'] = searchOnNameOnly;
         }
 
         let useFormData = false;
@@ -3864,9 +3874,10 @@ export class LIAPIGeoIdentityServiceApi {
      * @param familyName This filters all the associated identities of address by family Name
      * @param confidence To adjust quality threshold of data returned. Default is HIGH
      * @param maxCandidates Number of identities returned in response
-     * @param includeNeighborhoodDetails Whether to include neighborhood details in the response or not. Default is Y
+     * @param theme theme parameter for filtering results
+     * @param filter filter params
      */
-    public getIdentityByAddress (address: string, givenName?: string, familyName?: string, confidence?: string, maxCandidates?: string, includeNeighborhoodDetails?: string) : Promise<{ response: http.IncomingMessage; body: GeoIdentityResponse;  }> {
+    public getIdentityByAddress (address: string, givenName?: string, familyName?: string, confidence?: string, maxCandidates?: string, theme?: string, filter?: string) : Promise<{ response: http.IncomingMessage; body: GeoIdentityResponse;  }> {
         const localVarPath = this.basePath + '/geoidentity/v1/identity/byaddress';
         let queryParameters: any = {};
         let headerParams: any =  this.defaultHeaders;
@@ -3898,8 +3909,12 @@ export class LIAPIGeoIdentityServiceApi {
             queryParameters['maxCandidates'] = maxCandidates;
         }
 
-        if (includeNeighborhoodDetails !== undefined) {
-            queryParameters['includeNeighborhoodDetails'] = includeNeighborhoodDetails;
+        if (theme !== undefined) {
+            queryParameters['theme'] = theme;
+        }
+
+        if (filter !== undefined) {
+            queryParameters['filter'] = filter;
         }
 
         let useFormData = false;
@@ -3953,8 +3968,10 @@ export class LIAPIGeoIdentityServiceApi {
      * Gets Identity
      * @param email This specifies the email address
      * @param confidence To adjust quality threshold of data returned. Default is HIGH
+     * @param theme theme parameter for filtering results
+     * @param filter filter params
      */
-    public getIdentityByEmail (email: string, confidence?: string) : Promise<{ response: http.IncomingMessage; body: Identity;  }> {
+    public getIdentityByEmail (email: string, confidence?: string, theme?: string, filter?: string) : Promise<{ response: http.IncomingMessage; body: Identity;  }> {
         const localVarPath = this.basePath + '/geoidentity/v1/identity/byemail';
         let queryParameters: any = {};
         let headerParams: any =  this.defaultHeaders;
@@ -3972,6 +3989,14 @@ export class LIAPIGeoIdentityServiceApi {
 
         if (confidence !== undefined) {
             queryParameters['confidence'] = confidence;
+        }
+
+        if (theme !== undefined) {
+            queryParameters['theme'] = theme;
+        }
+
+        if (filter !== undefined) {
+            queryParameters['filter'] = filter;
         }
 
         let useFormData = false;
@@ -4028,9 +4053,10 @@ export class LIAPIGeoIdentityServiceApi {
      * @param familyName This filters all the associated identities of address by family Name
      * @param confidence To adjust quality threshold of data returned. Default is HIGH
      * @param maxCandidates Number of identities returned in response
-     * @param includeNeighborhoodDetails Whether to include neighborhood details in the response or not. Default is Y
+     * @param theme theme parameter for filtering results
+     * @param filter filter params
      */
-    public getIdentityByPBKey (pbKey: string, givenName?: string, familyName?: string, confidence?: string, maxCandidates?: string, includeNeighborhoodDetails?: string) : Promise<{ response: http.IncomingMessage; body: GeoIdentityResponse;  }> {
+    public getIdentityByPBKey (pbKey: string, givenName?: string, familyName?: string, confidence?: string, maxCandidates?: string, theme?: string, filter?: string) : Promise<{ response: http.IncomingMessage; body: GeoIdentityResponse;  }> {
         const localVarPath = this.basePath + '/geoidentity/v1/identity/bypbkey';
         let queryParameters: any = {};
         let headerParams: any =  this.defaultHeaders;
@@ -4062,8 +4088,12 @@ export class LIAPIGeoIdentityServiceApi {
             queryParameters['maxCandidates'] = maxCandidates;
         }
 
-        if (includeNeighborhoodDetails !== undefined) {
-            queryParameters['includeNeighborhoodDetails'] = includeNeighborhoodDetails;
+        if (theme !== undefined) {
+            queryParameters['theme'] = theme;
+        }
+
+        if (filter !== undefined) {
+            queryParameters['filter'] = filter;
         }
 
         let useFormData = false;
@@ -4117,8 +4147,10 @@ export class LIAPIGeoIdentityServiceApi {
      * Gets Identity
      * @param twitter Twitter handle of the identity.
      * @param confidence To adjust quality threshold of data returned. Default is HIGH
+     * @param theme theme parameter for filtering results
+     * @param filter filter params
      */
-    public getIdentityByTwitter (twitter: string, confidence?: string) : Promise<{ response: http.IncomingMessage; body: Identity;  }> {
+    public getIdentityByTwitter (twitter: string, confidence?: string, theme?: string, filter?: string) : Promise<{ response: http.IncomingMessage; body: Identity;  }> {
         const localVarPath = this.basePath + '/geoidentity/v1/identity/bytwitter';
         let queryParameters: any = {};
         let headerParams: any =  this.defaultHeaders;
@@ -4136,6 +4168,14 @@ export class LIAPIGeoIdentityServiceApi {
 
         if (confidence !== undefined) {
             queryParameters['confidence'] = confidence;
+        }
+
+        if (theme !== undefined) {
+            queryParameters['theme'] = theme;
+        }
+
+        if (filter !== undefined) {
+            queryParameters['filter'] = filter;
         }
 
         let useFormData = false;
@@ -10220,6 +10260,83 @@ export class LIAPIGeocodeServiceApi {
     });*/
     }
     /**
+     * Get Address
+     * Performs forward geocoding for a ESRI.
+     * @param f format eg. JSON
+     * @param addresses address payload in json format
+     */
+    public geocodeISRIBatch (f: string, addresses: string) : Promise<{ response: http.IncomingMessage; body: GeocodeServiceResponse;  }> {
+        const localVarPath = this.basePath + '/geocode-service/v1/arcgis/rest/services/PBLocator/GeocodeServer/geocodeAddresses';
+        let queryParameters: any = {};
+        let headerParams: any =  this.defaultHeaders;
+        let formParams: any = {};
+
+
+        // verify required parameter 'f' is not null or undefined
+        if (f === null || f === undefined) {
+             return Promise.reject({ response: null, body: {errors:[{"errorCode":"Validation_Error",errorDescription:"Required parameter f was null or undefined when calling geocodeISRIBatch."}]}})
+        }
+
+        // verify required parameter 'addresses' is not null or undefined
+        if (addresses === null || addresses === undefined) {
+             return Promise.reject({ response: null, body: {errors:[{"errorCode":"Validation_Error",errorDescription:"Required parameter addresses was null or undefined when calling geocodeISRIBatch."}]}})
+        }
+
+        let useFormData = false;
+
+        if (f !== undefined) {
+            formParams['f'] = f;
+        }
+
+        if (addresses !== undefined) {
+            formParams['addresses'] = addresses;
+        }
+
+        let requestOptions: request.Options = {
+            method: 'POST',
+            qs: queryParameters,
+            headers: headerParams,
+            uri: localVarPath,
+            useQuerystring: this._useQuerystring,
+            json: true,
+        };
+
+
+   //return this.authentications.oAuth2Password.applyToRequest()
+    //.then((data)=>{
+
+
+       // this.authentications.default.applyToRequest(requestOptions);
+        requestOptions.headers = {"authorization":"Bearer " + this.oAuthCred.access_token};
+        if (Object.keys(formParams).length) {
+            if (useFormData) {
+                (<any>requestOptions).formData = formParams;
+            } else {
+                requestOptions.form = formParams;
+            }
+        }
+
+        return new Promise<{ response: http.IncomingMessage; body: GeocodeServiceResponse;  }>((resolve, reject) => {
+            request(requestOptions, (error, response, body) => {
+                if (error) {
+                    reject(error);
+                } else {
+                    if (response.statusCode >= 200 && response.statusCode <= 299) {
+                        resolve({ response: response, body: body });
+                    } else {
+                        reject(response);
+                    }
+                }
+            });
+        });
+
+
+   /* })
+    .catch((error) =>{
+    return Promise.reject(error);
+    });*/
+    }
+    /**
      * Gets Capabilities
      * Gets Capabilities
      * @param datapackBundle value of datapackBundle
@@ -10343,6 +10460,73 @@ export class LIAPIGeocodeServiceApi {
         }
 
         return new Promise<{ response: http.IncomingMessage; body: ConfiguredDictionaryResponse;  }>((resolve, reject) => {
+            request(requestOptions, (error, response, body) => {
+                if (error) {
+                    reject(error);
+                } else {
+                    if (response.statusCode >= 200 && response.statusCode <= 299) {
+                        resolve({ response: response, body: body });
+                    } else {
+                        reject(response);
+                    }
+                }
+            });
+        });
+
+
+   /* })
+    .catch((error) =>{
+    return Promise.reject(error);
+    });*/
+    }
+    /**
+     * Gets Capabilities
+     * Gets Capabilities
+     * @param f format eq. json
+     */
+    public getESRICapabilities (f: string) : Promise<{ response: http.IncomingMessage; body: GeocodeCapabilitiesResponse;  }> {
+        const localVarPath = this.basePath + '/geocode-service/v1/arcgis/rest/services/PBLocator/GeocodeServer';
+        let queryParameters: any = {};
+        let headerParams: any =  this.defaultHeaders;
+        let formParams: any = {};
+
+
+        // verify required parameter 'f' is not null or undefined
+        if (f === null || f === undefined) {
+             return Promise.reject({ response: null, body: {errors:[{"errorCode":"Validation_Error",errorDescription:"Required parameter f was null or undefined when calling getESRICapabilities."}]}})
+        }
+
+        if (f !== undefined) {
+            queryParameters['f'] = f;
+        }
+
+        let useFormData = false;
+
+        let requestOptions: request.Options = {
+            method: 'GET',
+            qs: queryParameters,
+            headers: headerParams,
+            uri: localVarPath,
+            useQuerystring: this._useQuerystring,
+            json: true,
+        };
+
+
+   //return this.authentications.oAuth2Password.applyToRequest()
+    //.then((data)=>{
+
+
+       // this.authentications.default.applyToRequest(requestOptions);
+        requestOptions.headers = {"authorization":"Bearer " + this.oAuthCred.access_token};
+        if (Object.keys(formParams).length) {
+            if (useFormData) {
+                (<any>requestOptions).formData = formParams;
+            } else {
+                requestOptions.form = formParams;
+            }
+        }
+
+        return new Promise<{ response: http.IncomingMessage; body: GeocodeCapabilitiesResponse;  }>((resolve, reject) => {
             request(requestOptions, (error, response, body) => {
                 if (error) {
                     reject(error);
