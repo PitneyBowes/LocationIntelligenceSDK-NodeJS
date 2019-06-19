@@ -15,5 +15,6 @@
         "typings/browser",
         "typings/browser.d.ts"
     ]
+	
 }
 
